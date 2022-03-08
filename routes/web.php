@@ -16,3 +16,15 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/contato', function () {
+    return view('contato');
+});
+
+Route::get('/produtos', function () { //aqui é a url que o usuário ve no site
+    return view('products'); //aqui é o nome do arquivo que criamos, podendo ter um nome desejado. 
+});
+
+Route::get('/outro', function () {
+    return view('contato');
+});
