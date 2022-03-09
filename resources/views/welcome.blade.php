@@ -37,7 +37,7 @@
 
             @elseif($nome == "Bianca")
                 <!-- <p>O nome é Bianca</p>  -->
-                <p>O nome é {{ $nome }} e ela tem {{ $idade }} anos e tem a profissão {{ $profissao }}.</p>  <!-- Mais dinâmico --> 
+                <p>O nome é {{ $nome }} e ela tem {{ $idade }} anos e tem a profissão {{ $profi }}.</p>  <!-- Mais dinâmico --> 
 
             @else
                 <p>O nome não é Pedro</p>
