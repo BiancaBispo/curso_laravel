@@ -18,7 +18,18 @@ Route::get('/', function () {
     $nome = "Bianca";
     $idade = 22;
 
-    return view('welcome', ['nome' => $nome, 'idade' => $idade, 'profi' => "Programador"]); //Array 
+    $arr = [10,20,30,40,50];    //Array
+
+    $nomes = ["Bianca", "Lucas", "Janete", "Max"]; //Array
+
+    return view('welcome', 
+    [
+        'nome' => $nome, 
+        'idade' => $idade, 
+        'profissao' => "Programador",
+        'arr' => $arr,
+        'nomes' => $nomes
+    ]); //Array 
 });
 
 Route::get('/contato', function () {
@@ -28,6 +39,7 @@ Route::get('/contato', function () {
 Route::get('/produtos', function () { //aqui é a url que o usuário ve no site
     return view('products'); //aqui é o nome do arquivo que criamos, podendo ter um nome desejado. 
 });
+
 
 Route::get('/outro', function () {
     return view('contato');
