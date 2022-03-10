@@ -14,6 +14,14 @@ Route::get('/', [EventController::class, 'index']);
 Route::get('/events/create', [EventController::class, 'create']); 
 /*o evento criará o caminho da barra de busca e dos arquivos que criamos*/
 
+/*Comando para ativar o POST salvamento do banco através da view*/ 
+Route::post('/events',[EventController::class, 'store']);
+/*primeiro passamos o caminho, depois ativamos o EventController (do BD) 
+e por ultimo qual a view que quero atingir através do método store*/
+
+
+
+
 
 Route::get('/contato', function () { //aqui é a url que o usuário ve no site
     return view('contato');//aqui é o nome do arquivo que criamos, podendo ter um nome desejado. 
