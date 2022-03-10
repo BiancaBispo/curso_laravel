@@ -12,7 +12,7 @@
 {{--Chamando o body--}}
 @section('content')
 
-    <div id="event-create-container" class="col md-5 offset-md-1">b{{--aqui arruma as linhas ultrapassada do link--}}
+    <div id="event-create-container" class="col md-5 offset-md-1">{{--aqui arruma as linhas ultrapassada do link--}}
         <h1>Crie um evento</h1>
         {{--o nosso action é a rota láa do arquivo web.php, que contém realiza a intersecção entre o controller e essa view--}}
         <form action="/events" method="POST">

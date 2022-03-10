@@ -42,8 +42,8 @@ class EventController extends Controller
         //Após a criação precisamos salvar esses objetos instanciados
         $event->save();
 
-        //Depois de salvar redirecionar o usuário para alguma página desejada. 
-        return redirect('/');
+        //Depois de salvar redirecionar o usuário para alguma página desejada e junto uma mensagem. 
+        return redirect('/')->with('msg', 'Evento criado com sucesso!');
 
     }
     
