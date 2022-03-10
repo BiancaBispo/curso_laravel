@@ -6,25 +6,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+/*Vamos chamar a o model (ele fará a conexão entre o banco e a view) */
+use App\Models\Event;
+
 class EventController extends Controller
 {
     public function index() {
 
-        $nome = "Bianca";
-        $idade = 22;
-    
-        $arr = [10,20,30,40,50];    //Array
-    
-        $nomes = ["Bianca", "Lucas", "Janete", "Max"]; //Array
-    
-        return view('welcome', 
-        [
-            'nome' => $nome, 
-            'idade' => $idade, 
-            'profissao' => "Programador",
-            'arr' => $arr,
-            'nomes' => $nomes
-        ]); //Array 
+        //ativando o model Event
+        $events = Event::all();
+
+        return view('welcome', ['events' => $events]); //Array 
     }
 
     //function do Evento

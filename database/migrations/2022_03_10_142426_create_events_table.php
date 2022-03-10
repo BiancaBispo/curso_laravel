@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePersonalAccessTokensTable extends Migration
+class CreateEventsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,13 @@ class CreatePersonalAccessTokensTable extends Migration
      */
     public function up()
     {
-        Schema::create('personal_access_tokens', function (Blueprint $table) {
+        Schema::create('events', function (Blueprint $table) {
             $table->id();
-            $table->morphs('tokenable');
-            $table->string('name');
-            $table->string('token', 64)->unique();
-            $table->text('abilities')->nullable();
-            $table->timestamp('last_used_at')->nullable();
             $table->timestamps();
+            $table->string("title"); //o nome no evento
+            $table->text("description"); //caixa de texto para a descrição do evento
+            $table->string("city"); // cidade
+            $table->boolean("private"); //um boolean para saber se o evento é privado ou não
         });
     }
 
@@ -31,6 +30,6 @@ class CreatePersonalAccessTokensTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('personal_access_tokens');
+        Schema::dropIfExists('events');
     }
 }
