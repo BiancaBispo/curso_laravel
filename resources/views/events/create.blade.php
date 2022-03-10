@@ -15,8 +15,15 @@
     <div id="event-create-container" class="col md-5 offset-md-1">{{--aqui arruma as linhas ultrapassada do link--}}
         <h1>Crie um evento</h1>
         {{--o nosso action é a rota láa do arquivo web.php, que contém realiza a intersecção entre o controller e essa view--}}
-        <form action="/events" method="POST">
-            @csrf
+        
+        <form action="/events" method="POST" enctype="multipart/form-data">
+            @csrf {{--Permite o envio do form para o banco de dados--}}
+
+            {{--Imagem no form--}}
+            <div class="form-group">
+                <label for="image">Imagem do Evento:</label>
+                <input type="file" class="form-control-file" id="image" name="image" placeholder="Nome do evento">
+            </div>
             <div class="form-group">
                 <label for="title">Evento:</label>
                 <input type="text" class="form-control" id="title" name="title" placeholder="Nome do evento">
