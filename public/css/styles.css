@@ -1,3 +1,7 @@
 * { /*todo o projeto vai ter essas config*/
     font-family: 'Open Sans';
 }
+
+#navbar img {
+    width: 30px;
+}

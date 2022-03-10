@@ -20,6 +20,25 @@
         <script src="/js/scripts.js"></script>
     </head>
     <body>
+        <!--Menu-->
+        <header>
+            <nav class= "navbar navbar-expand-lg navbar-light">
+                <div class="collapse navbar-collapse" id="navbar">
+                    <a href="/" class="navbar-brand">
+                        <img src="/img/flor-de-lotus.png" alt="Eventos">
+                    </a>
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a href="/" class="nav-link">Eventos</a></li>
+                        {{--Colocando o link de acesso para a pagina desejada--}}
+                        <li class="nav-item"><a href="/events/create" class="nav-link">Criar Eventos</a></li>
+                        <li class="nav-item"><a href="/" class="nav-link">Entrar</a></li>
+                        <li class="nav-item"><a href="/" class="nav-link">Cadastrar</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+
         {{-- Comando para inserir nas paginas criadas essa estrutura já pronta --}}
         @yield('content')
 
@@ -29,5 +48,7 @@
     <footer>
         <p>HDC Events &copy; 2022</p>
     </footer>
+    <!--Adicionando o script para os icons-->
+    <script src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     </body>
 </html>
