@@ -14,6 +14,9 @@ Route::get('/', [EventController::class, 'index']);
 Route::get('/events/create', [EventController::class, 'create']); 
 /*o evento criará o caminho da barra de busca e dos arquivos que criamos*/
 
+//Comando para puxar as informações de um só id (usuário do banco) em uma rota chamada show.
+Route::get('/events/{id}', [EventController::class, 'show']);
+
 /*Comando para ativar o POST salvamento do banco através da view*/ 
 Route::post('/events',[EventController::class, 'store']);
 /*primeiro passamos o caminho, depois ativamos o EventController (do BD) 

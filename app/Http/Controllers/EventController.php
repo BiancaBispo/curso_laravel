@@ -61,6 +61,13 @@ class EventController extends Controller
         return redirect('/')->with('msg', 'Evento criado com sucesso!');
     }
     
+    //o show e o id é o das rotas
+    public function show($id) {
+        //chamando o model Event
+        $event = Event::findOrFail($id);
+        // vai retornar na view o mesmo caminho da rota
+        return view('events.show', ['event' => $event]);
+    }
 
 
     /*OBS: o indicado é separa as views por pasta, porque assim, conseguimos
