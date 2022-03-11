@@ -33,11 +33,16 @@ class EventController extends Controller
         eventos ao banco*/
 
         $event = new Event;
-        //Criação do objeto para esses dados com o nome dos campos das tabelas
+        //Criação do objeto para esses dados com o nome dos campos das tabelas, puxando essas informações através do request
         $event->title = $request->title;
         $event->city = $request->city;
         $event->private = $request->private;
         $event->description = $request->description;
+       
+        //JSON - A unica diferença é de vez informar que essa informação vai vim em string, vamos falar que é um Array
+        $event->items = $request->items;
+
+
 
         // Comando para o Upload da Imagem
         if($request->hasFile('image') && $request->file('image')->isValid()) {

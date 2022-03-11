@@ -145,7 +145,7 @@ header{
 
 /*container fomulário página create*/
 #event-create-container{
-    padding: 30px;
+    padding: 40px;
  }
  
  #event-create-container label{
@@ -155,7 +155,7 @@ header{
  #event-create-container input,
  #event-create-container select,
  #event-create-container textarea{
-     font-size: 12px;
+     font-size: 15px;
   }
   
 /* Event page*/
@@ -195,6 +195,15 @@ header{
     margin:20px 0;
 }
 
+#items-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+#items-list li {
+    display: flex;
+}
+
 /*footer*/
 footer{
     text-align: center;
@@ -210,9 +219,6 @@ footer{
 footer p {
     margin-bottom: 0;
 }
-
-
-
 
 
 
