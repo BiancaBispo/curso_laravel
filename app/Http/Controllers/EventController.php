@@ -12,11 +12,32 @@ use App\Models\Event;
 class EventController extends Controller
 {
     public function index() {
+        /*Ativando a busca, o search da variável que 
+        colocamos no input da busca. 
+        E o para busca a informação nessa variável */
+        $search = request('search');
 
-        //ativando o model Event
-        $events = Event::all();
+        //Se a busca estiver preenchida:
+        if($search) {
+            /*o evento para ativar a busca, 
+            buscando por título, que não precisa ser EXATAMENTE igual 
+            'usa-se para isso o LIKE', sendo qualquer coisa para trás 
+            ou para frente dos caracteres.
+            E o GET diz que quer pegar esses registros
+            */
+            
+            $events = Event::where([
+                ['title', 'like', '%' .$search. '%']
+            ])->get();
 
-        return view('welcome', ['events' => $events]); //Array 
+        } else{
+            //Se não, ativa o Model Event
+            $events = Event::all();
+        }
+
+
+        //lembrar de sempre enviar o novo evento para a view!!
+        return view('welcome', ['events' => $events, 'search' => $search]); //Array 
     }
 
     //function do Evento
@@ -34,7 +55,9 @@ class EventController extends Controller
 
         $event = new Event;
         //Criação do objeto para esses dados com o nome dos campos das tabelas, puxando essas informações através do request
+       /*Lembrando que a ordem tem que ser igual aos input da view*/
         $event->title = $request->title;
+        $event->date = $request->date;
         $event->city = $request->city;
         $event->private = $request->private;
         $event->description = $request->description;

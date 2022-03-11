@@ -29,3 +29,6 @@ e por ultimo qual a view que quero atingir através do método store*/
 Route::get('/contato', function () { //aqui é a url que o usuário ve no site
     return view('contato');//aqui é o nome do arquivo que criamos, podendo ter um nome desejado. 
 });
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');
