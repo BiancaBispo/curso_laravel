@@ -42,6 +42,16 @@ header{
     padding: 10px;
 }
 
+/*mensagem botão confirmar presença*/
+#info-container .already-joined-msg {
+    margin: 15px 0;
+    color: #004085;
+    background-color: #cce5ff;
+    border: 1px solid #b8daff;
+    padding: 10px;
+    width: 275px;
+}
+
 /*configuração navbar*/
 #navbar img {
     width: 30px;

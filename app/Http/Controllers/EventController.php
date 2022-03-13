@@ -100,6 +100,19 @@ class EventController extends Controller
     public function show($id) {
         //chamando o model Event
         $event = Event::findOrFail($id);
+    
+        $user = auth()->user();
+        $hasUserJoined = false;
+
+        if($user) {
+            $userEvents = $user->eventsAsParticipant->toArray();
+
+            foreach($userEvents as $userEvent) {
+                if($userEvent['id'] == $id) {
+                    $hasUserJoined = true;
+                }
+            }
+        }
 
         //comando para exibir os dados (os eventos criados dele) do usuário na view
         $eventOwner = User::where('id', $event->user_id)->first()->toArray();
@@ -110,7 +123,7 @@ class EventController extends Controller
 
 
         // vai retornar na view o mesmo caminho das rotas
-        return view('events.show', ['event' => $event, 'eventOwner'=>$eventOwner]);
+        return view('events.show', ['event' => $event, 'eventOwner'=>$eventOwner, 'hasUserJoined'=>$hasUserJoined]);
     }
 
     //Função para mostrar os eventos criados do usuário 
@@ -186,7 +199,7 @@ class EventController extends Controller
 
     //Participantes do evento
     public function joinEvent($id) {
-
+        //para que somente usuários autores possam participar dos eventos
         $user = auth()->user();
 
         $user->eventsAsParticipant()->attach($id);
@@ -195,6 +208,18 @@ class EventController extends Controller
 
         return redirect('/dashboard')->with('msg', 'Sua presença está confirmada no evento ' . $event->title);
 
+    }
+
+    public function leaveEvent($id){
+        //para que somente usuários autores possam sair dos eventos
+        $user = auth()->user();
+
+        //é o método detach que permite tirar a ligação entre usuário e evento 
+        $user->eventsAsParticipant()->detach($id);
+
+        $event = Event::findOrFail($id);
+
+        return redirect('/dashboard')->with('msg', 'Você saiu com sucesso do evento: ' . $event->title);
     }
 
     /*OBS: o indicado é separa as views por pasta, porque assim, conseguimos
