@@ -120,9 +120,13 @@ class EventController extends Controller
 
         //verificar os eventos desse usuário, puxando a função do events laaa do arquivo user.php 
         $events = $user->events;
+        
+        //para acessar aos eventos que os usuários participam 
+        $eventsAsParticipant = $user->eventsAsParticipant;
 
         //retornar a view
-        return view('events.dashboard', ['events' => $events]);
+        return view('events.dashboard', 
+        ['events' => $events, 'eventsAsParticipant' => $eventsAsParticipant]);
     }
 
 
@@ -138,9 +142,17 @@ class EventController extends Controller
 
     //Função para editar os dados no banco de dados (puxar as informações)
     public function edit($id) {
-        $edit = Event::findOrFail($id);
+        //para que somente usuários autores possam editar seus arquivos
+        $user = auth()->user();
 
-        return view('events.edit', ['event' => $edit]);
+        $event = Event::findOrFail($id);
+
+        //se o usuário for diferente do evento (para editar) ele o redireciona para a dashboard dele, não a  de outro pessoa
+        if($user->id != $event->user_id) {
+            return redirect('/dashboard');
+        }
+
+        return view('events.edit', ['event' => $event]);
     }
 
     //Comando atualizar o banco de dados depois do edit

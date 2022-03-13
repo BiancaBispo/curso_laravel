@@ -49,8 +49,45 @@
     @else 
     <p>Você ainda não tem eventos, <a href="/events/create">criar evento.</a> </p>
     @endif
-
 </div>
+
+    {{--tabela com os eventos que o usuário vai participar--}}
+    <div class="col-md-10 offset-md-1 dashboard-title-container">
+        <h1>Eventos que estou participando: </h1>
+    </div>
+    {{--tabela--}}
+    <div class="col-md-10 offset-md-1 dashboard-events-container">
+        @if(count($eventsAsParticipant) > 0)
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Participantes</th>
+                    <th scope="col">Ação</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($eventsAsParticipant as $event)
+                    <tr>
+                        {{--dentro de um loop com mais 1 para que não fique evento número 0 --}}
+                        <td scropt="row">{{ $loop->index + 1 }}</td>
+                        <td><a href="/events/ {{ $event->id }}">{{ $event->title }}</a></td>
+                        <td>{{ count($event->users) }}</td>
+                        <td> 
+                            <a href="#">Sair do evento</a>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+        @else
+            <p>Você ainda não está participando de nenhum evento, <a href="/">veja todos os eventos.</a> </p>
+        @endif
+
+    </div>
+
+    
 
 @endsection
 
