@@ -6,6 +6,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+//Adicionando o Model do usuário criado anteriormente
+use App\Models\User;
+
 /*Vamos chamar a o model (ele fará a conexão entre o banco e a view) */
 use App\Models\Event;
 
@@ -98,8 +101,17 @@ class EventController extends Controller
     public function show($id) {
         //chamando o model Event
         $event = Event::findOrFail($id);
-        // vai retornar na view o mesmo caminho da rota
-        return view('events.show', ['event' => $event]);
+
+        //comando para exibir os dados (os eventos criados dele) do usuário na view
+        $eventOwner = User::where('id', $event->user_id)->first()->toArray();
+        /*diferente de quando fizemos o da busca, aqui queremos o usuário de fato, 
+        então vai buscar somente o usuário quando o event for acionado e o primeiro 
+        id que for igual ao do usuário ele vai puxar para a view, evitando que ele busque
+         por todo o banco todos os ids iguais, otimizando o site   */
+
+
+        // vai retornar na view o mesmo caminho das rotas
+        return view('events.show', ['event' => $event, 'eventOwner'=>$eventOwner]);
     }
 
 
