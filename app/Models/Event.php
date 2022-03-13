@@ -16,5 +16,10 @@ class Event extends Model
 
     //Informando para o event que esse campo é de data
     protected $dates = ['date'];
+
+    //Informar que o usuário, dono do evento, vai retornar tudo o que pertence apenas a ele.
+    public function user() {
+        return $this->belongsTo('App\Models\User');
+    }
     
 }

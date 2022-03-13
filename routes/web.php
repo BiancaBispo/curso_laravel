@@ -11,8 +11,10 @@ Route::get('/', [EventController::class, 'index']);
 
 
 //Aqui agora vamos criar um evento.
-Route::get('/events/create', [EventController::class, 'create']); 
-/*o evento criará o caminho da barra de busca e dos arquivos que criamos*/
+Route::get('/events/create', [EventController::class, 'create'])->middleware('auth'); 
+/*o evento criará o caminho da barra de busca e dos arquivos que criamos, e a função 
+middleware vai basicamente agir entre a nossa ação e a entrega da view , se não estiver 
+logado é direcionado para fazer o login*/
 
 //Comando para puxar as informações de um só id (usuário do banco) em uma rota chamada show.
 Route::get('/events/{id}', [EventController::class, 'show']);

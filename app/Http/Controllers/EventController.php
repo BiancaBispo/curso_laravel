@@ -83,6 +83,11 @@ class EventController extends Controller
             $event->image = $imageName; 
         }
 
+        //Comandos responsáveis por inserir um  user_id à cada evento criado
+          $user = auth()->user();
+          //o evento do usuario é igual ao id dele
+          $event->user_id = $user->id;
+
         //Após a criação precisamos salvar esses objetos instanciados
         $event->save();
         //Depois de salvar redirecionar o usuário para alguma página desejada e junto uma mensagem. 
