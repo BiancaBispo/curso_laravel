@@ -115,6 +115,18 @@ class EventController extends Controller
     }
 
 
+    public function dashboard(){
+        //pegar o usuário autenticado 
+        $user = auth()->user();
+
+        //verificar os eventos desse usuário, puxando a função do events laaa do arquivo user.php 
+        $events = $user->events;
+
+        //retornar a view
+        return view('events.dashboard', ['events' => $events]);
+    }
+
+
     /*OBS: o indicado é separa as views por pasta, porque assim, conseguimos
      separar os nossos controller e a aplicação fica mais organizada */ 
 
