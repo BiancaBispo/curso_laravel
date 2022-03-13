@@ -114,7 +114,7 @@ class EventController extends Controller
         return view('events.show', ['event' => $event, 'eventOwner'=>$eventOwner]);
     }
 
-
+    //Função para mostrar os eventos criados do usuário 
     public function dashboard(){
         //pegar o usuário autenticado 
         $user = auth()->user();
@@ -126,6 +126,16 @@ class EventController extends Controller
         return view('events.dashboard', ['events' => $events]);
     }
 
+
+    //Função para deletar um dado (evento do usuário)
+    public function destroy($id) {
+
+        //Chamando através do id com a função 'delete' para deletar o dado  
+        Event::findOrFail($id)->delete();
+
+        //retornando na view
+        return redirect('/dashboard')->with('msg', 'Evento excluído com sucesso!');
+    }
 
     /*OBS: o indicado é separa as views por pasta, porque assim, conseguimos
      separar os nossos controller e a aplicação fica mais organizada */ 

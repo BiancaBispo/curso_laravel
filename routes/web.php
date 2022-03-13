@@ -25,6 +25,9 @@ Route::post('/events',[EventController::class, 'store']);
 e por ultimo qual a view que quero atingir através do método store*/
 
 
+//Comando DELETE para deletar os dados no banco através do id
+Route::delete('/events/{id}', [EventController::class, 'destroy']);
+
 
 Route::get('/contato', function () { //aqui é a url que o usuário ve no site
     return view('contato');//aqui é o nome do arquivo que criamos, podendo ter um nome desejado. 
@@ -33,3 +36,4 @@ Route::get('/contato', function () { //aqui é a url que o usuário ve no site
 /*Adicionado a rota do dashboard do usuário para puxar as informações para a view, o middleware('auth') 
 permite o usuário de vê a view somente se estiver logado*/
 Route::get('/dashboard', [ EventController::class, 'dashboard'])->middleware('auth');
+
