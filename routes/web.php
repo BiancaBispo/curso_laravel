@@ -40,5 +40,7 @@ Route::get('/contato', function () { //aqui é a url que o usuário ve no site
 
 /*Adicionado a rota do dashboard do usuário para puxar as informações para a view, o middleware('auth') 
 permite o usuário de vê a view somente se estiver logado*/
-Route::get('/dashboard', [ EventController::class, 'dashboard'])->middleware('auth');
+Route::get('/dashboard', [EventController::class, 'dashboard'])->middleware('auth');
 
+//Participar do Evento
+Route::post('/events/join/{id}', [EventController::class, 'joinEvent'])->middleware('auth');
