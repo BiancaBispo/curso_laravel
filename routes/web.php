@@ -26,7 +26,12 @@ e por ultimo qual a view que quero atingir através do método store*/
 
 
 //Comando DELETE para deletar os dados no banco através do id
-Route::delete('/events/{id}', [EventController::class, 'destroy']);
+Route::delete('/events/{id}', [EventController::class, 'destroy'])->middleware('auth');
+
+//Comando para PEGAR os dados para EDITAR o banco de dados
+Route::get('/events/edit/{id}', [EventController::class, 'edit'])->middleware('auth');
+//Comando para EDITAR
+Route::Put('/events/update/{id}', [EventController::class, 'update'])->middleware('auth');
 
 
 Route::get('/contato', function () { //aqui é a url que o usuário ve no site

@@ -69,7 +69,6 @@ class EventController extends Controller
         $event->items = $request->items;
 
 
-
         // Comando para o Upload da Imagem
         if($request->hasFile('image') && $request->file('image')->isValid()) {
             //pegando a imagem e a extensão da mesma
@@ -135,6 +134,42 @@ class EventController extends Controller
 
         //retornando na view
         return redirect('/dashboard')->with('msg', 'Evento excluído com sucesso!');
+    }
+
+    //Função para editar os dados no banco de dados (puxar as informações)
+    public function edit($id) {
+        $edit = Event::findOrFail($id);
+
+        return view('events.edit', ['event' => $edit]);
+    }
+
+    //Comando atualizar o banco de dados depois do edit
+    public function update(Request $request){
+
+        $data = $request->all();
+
+        //copia do arquivo upload da imagem da função Store
+         if($request->hasFile('image') && $request->file('image')->isValid()) {
+            //pegando a imagem e a extensão da mesma
+            $requestImage = $request->image;
+            $extension = $requestImage->extension();
+
+            //pegar o nome do arquivo e alterar para uma string unica através do tempo de criação da mesma
+            $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . ".". $extension ;
+            
+            //Adicionar a imagem a pasta chamada events, salvo-as no servidor
+            $request->image->move(public_path('img/events'), $imageName);
+
+            //Alterar o nosso objeto, o nome anterior da imagem para o novo nome
+            $data['image'] = $imageName; 
+        }
+
+
+        Event::findOrFail($request->id)->update($data);
+        
+        //depois de terminar, redirecionar para outra página
+        return redirect('/dashboard')->with('msg', 'Evento editado com sucesso!');
+
     }
 
     /*OBS: o indicado é separa as views por pasta, porque assim, conseguimos
